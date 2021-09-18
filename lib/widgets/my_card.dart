@@ -12,21 +12,20 @@ class MyCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => GestureDetector(
-    child: Container(
-      child: child,
-      margin: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
-        boxShadow: const [
-          BoxShadow(
-            color: Colors.black,
-            blurRadius: 6,
-            offset: Offset(2, 2), // Shadow position
+        child: Container(
+          child: child,
+          margin: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.black,
+                blurRadius: 6,
+                offset: Offset(2, 2), // Shadow position
+              ),
+            ],
           ),
-        ],
-      ),
-    ),
-  );
-
+        ),
+      );
 }

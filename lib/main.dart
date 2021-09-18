@@ -27,8 +27,12 @@ class FlipperPage extends StatefulWidget {
   State<FlipperPage> createState() => _FlipperPageState();
 }
 
+enum Activiti { active, noActive }
+
 class _FlipperPageState extends State<FlipperPage> {
+  Activiti? activiti;
   int age = 20;
+  int deadYears = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,23 +73,59 @@ class _FlipperPageState extends State<FlipperPage> {
             ),
             Expanded(
               child: Row(
-                children: const <Widget>[
-                  Expanded(child: MyColumn(text: 'Push on')),
+                children: <Widget>[
                   Expanded(
                     child: MyColumn(
-                      text: 'FIND DATE',
-                      icon: Icons.outlet_sharp,
+                      text: 'ACTIVE',
+                      onTap: () {
+                        setState(() {
+                          activiti = Activiti.active;
+                        });
+                      },
+                      color: activiti == Activiti.active
+                          ? noActiveColor
+                          : myColorOne,
                       axis: MainAxisAlignment.center,
                     ),
+                  ),
+                  Expanded(
+                    child: MyColumn(
+                        text: 'FIND DATE',
+                        icon: Icons.outlet_sharp,
+                        axis: MainAxisAlignment.center,
+                        onTap: () => setState(() {
+                              double a = activiti == Activiti.active ? 15 : 7;
+                              deadYears = ((2 * a) / (age * 0.1)).round();
+                            })),
                   )
                 ],
               ),
             ),
             Expanded(
               child: Row(
-                children: const <Widget>[
-                  Expanded(child: MyColumn(text: 'You will die in 5 years')),
-                  Expanded(child: MyColumn(text: 'Reasons'))
+                children: <Widget>[
+                  Expanded(
+                    child: MyColumn(
+                      text: 'NO ACTIVE',
+                      onTap: () {
+                        setState(() {
+                          activiti = Activiti.noActive;
+                        });
+                      },
+                      color: activiti == Activiti.noActive
+                          ? noActiveColor
+                          : myColorOne,
+                      axis: MainAxisAlignment.center,
+                    ),
+                  ),
+                  Expanded(
+                    child: MyColumn(
+                      text: 'Die in',
+                      ageNumber:
+                          deadYears != 0 ? deadYears.toString() : 'Reasons',
+                      axis: MainAxisAlignment.center,
+                    ),
+                  )
                 ],
               ),
             ),

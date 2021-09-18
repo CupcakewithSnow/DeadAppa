@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:calculate/const.dart';
 import 'package:calculate/widgets/my_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,8 @@ class MyColumn extends StatelessWidget {
   final String? ageNumber;
   final Widget? myWidget;
   final MainAxisAlignment? axis;
+  final Function? onTap;
+  final Color? color;
   const MyColumn({
     Key? key,
     required this.text,
@@ -21,13 +24,17 @@ class MyColumn extends StatelessWidget {
     this.ageNumber,
     this.axis,
     this.icon,
+    this.onTap,
+    this.color,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) => GestureDetector(
+        onTap: ()=>onTap!(),
         child: Container(
           decoration: const BoxDecoration(),
           child: Expanded(
             child: MyCard(
+              color: color != null ? color! : myColorOne,
               child: Column(
                 mainAxisAlignment:
                     axis != null ? axis! : MainAxisAlignment.start,
